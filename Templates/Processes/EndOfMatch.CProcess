@@ -100,7 +100,7 @@ function EndOfMatch:Tick(delta)
 			else
 				Console:Cmd_TEAM(1)
 			end
-			if (MPCfg.GameMode == "Capture The Flag" or MPCfg.GameMode == "ICTF") then 	--OriOn_Modification
+			if Cfg.SimpleItems and (MPCfg.GameMode == "Capture The Flag" or MPCfg.GameMode == "ICTF") then 	--OriOn_Modification
 				for i=1,2 do	
 					local entity = Game.FlagEntityData[i].Entity
 					local param = Game.FlagEntityData[i].Param

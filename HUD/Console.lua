@@ -393,21 +393,19 @@ function Console:Cmd_TEAM(nr)
         CONSOLE_AddMessage("Switching team is unallowed during the round")
         return
     end
-    if nr then
-        nr = tonumber(nr)
-        if nr and (nr == 1 or nr == 2) and Cfg.Team ~= nr - 1 then
-            Cfg.Team = nr - 1
-            if MPCfg.GameMode == "Capture The Flag" or MPCfg.GameMode == "ICTF" then
-                for i = 1, 2 do
-                    local entity = Game.FlagEntityData[i].Entity
-                    local param = Game.FlagEntityData[i].Param
-                    Templates["Flag.CItem"]:Client_OnCreateSimpleItems(entity, param)
-                end
+    nr = tonumber(nr)
+    if nr and (nr == 1 or nr == 2) and Cfg.Team ~= nr - 1 then
+        Cfg.Team = nr - 1
+        if Cfg.SimpleItems and (MPCfg.GameMode == "Capture The Flag" or MPCfg.GameMode == "ICTF") then
+            for i = 1, 2 do
+                local entity = Game.FlagEntityData[i].Entity
+                local param = Game.FlagEntityData[i].Param
+                Templates["Flag.CItem"]:Client_OnCreateSimpleItems(entity, param)
             end
-            if Game.GMode ~= GModes.SingleGame then
-                Game.NewPlayerTeamRequest(NET.GetClientID(), Cfg.Team)
-                return
-            end
+        end
+        if Game.GMode ~= GModes.SingleGame then
+            Game.NewPlayerTeamRequest(NET.GetClientID(), Cfg.Team)
+            return
         end
     end
     if Cfg.Team == 0 then

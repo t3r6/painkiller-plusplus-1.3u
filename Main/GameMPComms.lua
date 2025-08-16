@@ -36,7 +36,7 @@ function Game:Server2ClientCommand(clientid, command, param)
 end
 
 function Game:Server2ClientRead(txt)
-  local pattern = "(%w+),(%w+),(%w+),(%w+),(%w+),(%w+),(%w+),(%w+)"
+  local pattern = "([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+)"
   local check = string.gsub(txt, pattern, "%1")
   if check == "L33T" then
     local specplayerid = string.gsub(txt, pattern, "%2")

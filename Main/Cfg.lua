@@ -884,7 +884,7 @@ Cfg = {
     "#3M#4arvin",
     "Luxor",
     "#4G#3unkel",
-    "Will\1634456",
+    "Will 4456",
     "H#34x#40#2r",
     "#3Billy",
     "#3S#2cott",

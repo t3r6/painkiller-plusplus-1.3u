@@ -43,9 +43,9 @@ VideoOptions =
 					y	 = 150,
 					action = "",
 					applyRequired = true,
---					align = MenuAlign.Left,
+					align = MenuAlign.Left,
 				},
---[[				
+					
 				Fullscreen =
 				{
 					type = MenuItemTypes.Checkbox,
@@ -58,10 +58,9 @@ VideoOptions =
 					y	 = 152,
 					action = "",
 					applyRequired = true,
-					disabled = 1,
 					align = MenuAlign.Right,
 				},
-]]--
+
 				GraphicsQuality =
 				{
 					type = MenuItemTypes.TextButtonEx,

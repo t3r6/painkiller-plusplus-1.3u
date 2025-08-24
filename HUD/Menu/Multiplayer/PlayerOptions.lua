@@ -8,7 +8,7 @@ PlayerOptions =
 
 	fontBigSize = 26,
 	backAction = "PainMenu:ApplySettings(); PainMenu:ActivateScreen(MultiplayerMenu)",
-	applyAction = "PainMenu:ApplySettings(); PainMenu:ActivateScreen(MultiplayerMenu)",
+	applyAction = "PainMenu:ApplySettings(true)",
 
 	items =
 	{

@@ -404,11 +404,11 @@ function Game:AfterNewClientConnected(clientID)
     if Game.PlayerStats[clientID] then return end -- ten klient juz sie podlaczyl -- or clientID>=150 and clientID<=170 
     -- send config values
   local str = Text2Tab(Game.ServerCheckModUser, ":")
-  if (clientID ~= tonumber(str[1]) or clientID == tonumber(str[1])) and str[2] ~= "MOD13" then
-    NET.DisconnectClient(clientID)
-    return
-  end
-  if clientID == tonumber(str[1]) and str[2] == "MOD13" then
+  -- if (clientID ~= tonumber(str[1]) or clientID == tonumber(str[1])) and str[2] ~= "MOD13" then
+  --   NET.DisconnectClient(clientID)
+  --   return
+  -- end
+  if clientID == tonumber(str[1]) --[[and str[2] == "MOD13"--]] then
     Game.ServerCheckModUser = "999:nil"
   end
     SendNetMethod(Game.SetConfiguration,clientID, true, true, Cfg.AllowBrightskins, Cfg.GameMode, Cfg.FragLimit, Cfg.CaptureLimit, Cfg.LMSLives, Cfg.TeamDamage, Cfg.ClientConsoleLockdown)
@@ -912,7 +912,7 @@ end
 -- [ENGINE - SERVER ONLY]  
 function Game:NewPlayerRequest(clientID,name,model,team,state,spectator)
   local str = Text2Tab(Game.ServerCheckModUser, ":")
-  if clientID == tonumber(str[1]) and str[2] == "MOD13" then
+  if clientID == tonumber(str[1]) --[[and str[2] == "MOD13"--]] then
     Game.ServerCheckModUser = "999:nil"
   end
 

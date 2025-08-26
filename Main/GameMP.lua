@@ -433,7 +433,7 @@ function Game:AfterNewClientConnected(clientID)
     SendNetMethod(Game.SetTimeLimit,clientID, true, true,MPCfg.TimeLimit,Game._TimeLimitOut,Game._countTimer)
     local rest = Cfg.MOTD
     
-    	local rest = "PK++ 1.2.1.64 Server - "
+    	local rest = "PK++ 1.3u (1.64) Server - "
 	if(Cfg.RocketFix) then rest = rest .. "RocketFix on - " else rest = rest .. "RocketFix off - "  end -- - rf:"..tostring(Cfg.RocketFactor).." rfo:"..tostring(Cfg.RocketFactorOrder).."
 	if(MPCfg.ProPlus) then rest = rest .. "ProPlus on;" else rest = rest .. "ProPlus off;"  end
 	rest = rest .. "ServerFPS - "..tostring(Cfg.ServerFPS)..";"

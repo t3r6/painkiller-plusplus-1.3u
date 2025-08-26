@@ -87,7 +87,7 @@ function pentagram:Tick(delta)
             self._ReturnTime = nil            
             if Cfg.PowerupDrop then
                 -- wraca na miejsce ale niewidoczny czeka na respawn
-                CItem.Show(self._Entity,0)
+                CItem.Show(self._Entity,false)
                 self.Place = 1             
                 self._Rst = self.RespawnTime * 30 
                 if Cfg.ItemRespawnFix then self._Rst = INP.GetTime() + self.RespawnTime end
@@ -171,7 +171,7 @@ end
 --OriOn_Modification=######################################################################
 --============================================================================
 function pentagram:Client_OnCreateSimpleItems(entity)
-	ENTITY.KillAllChildrenByName(entity,"pentagram") -- Pas frocément utile mais par sécuruté
+	ENTITY.KillAllChildrenByName(entity,"pentagram") -- Pas frocement utile mais par securute
 	local e = ENTITY.Create(ETypes.Billboard,"Script","pentagram")
 	local tex = "SIicon/powerup"
 	BILLBOARD.SetupCorona(e,1,0,0,0,0,0.7,0,0,0,tex,Color:New(255,0,0,0):Compose(),4,true)    

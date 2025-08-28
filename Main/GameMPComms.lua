@@ -6,10 +6,10 @@ function Game:Server2ClientCommand(clientid,command,param)
 	if(command == "pollall")then
 		if Game:IsServer() then           
 	    for i,ps in Game.PlayerStats do
-	    			--if(Game.PlayerStats[ps.ClientID].Version==nil)then Game.PlayerStats[ps.ClientID].Version = false end
-				if(Game.PlayerStats[ps.ClientID].Version==false or Game.PlayerStats[ps.ClientID].Version==nil)then					
+	    	if not (Game.PlayerStats[ps.ClientID].Version or Game.PlayerStats[ps.ClientID].notified) then
 					local txt = "Please install PK++ www.pkeuro.com"
 					SendNetMethod(Game.ConsoleClientMessage, ps.ClientID, true, true, ServerID, txt, 0)
+          Game.PlayerStats[ps.ClientID].notified = true
 				end
 			end
 		end

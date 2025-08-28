@@ -243,7 +243,7 @@ Cfg =
     NetcodeEnemyPredictionInterpolationFactor = 0.66,
     NetcodeMinUpstreamFrameSize = 0,
     ZoomFOV = 50,
-    StopMatchOnTeamQuit = true,
+    StopMatchOnTeamQuit = false,
     NoWarmup = false,
     PureScripts = false,	-- strict scripts checksum checking during net connection
     ShowTimer = true,
@@ -296,7 +296,7 @@ Cfg =
     ItemRespawnFix = true,
 
   -- HUD / UI / Crosshair
-    BrightAmmo = true,
+    BrightAmmo = false,
     BrightSkins = true,
     BrightSkinsArmors = false,
     BrightSkinsFull = false,

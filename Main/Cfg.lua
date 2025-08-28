@@ -605,7 +605,7 @@ Cfg =
   -- Other
     DirectInput = true,
 
-    Overtime = 2,
+    Overtime = 0,  -- default "2"
     DuelQueue = true,
     TournamentSettings = false,
     ForceSpec = false,

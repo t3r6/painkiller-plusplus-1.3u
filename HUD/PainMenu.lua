@@ -90,6 +90,7 @@ PainMenu = {
   mapsOnServerCTF = {},
   mapsOnServerDUE = {},
   mapsOnServerLMS = {},
+  mapsOnServerCLA = {},
   lastMPMode = "",
   playerModel = nil,
   playerLight = nil,

@@ -138,11 +138,6 @@ function Rocket:OnCollision(x, y, z, nx, ny, nz, e, h_me, h_other, vx, vy, vz, v
       Explosion(x, y, z, self.ExplosionStrength / resultfactor, self.ExplosionRange, self.ObjOwner.ClientID, AttackTypes.Rocket, self.Damage, resultfactor)
     end
   else
-    if MPCfg.GameMode == "People Can Fly" then
-      self.ExplosionRange = 4.5
-      self.ExplosionStrength = self.ExplosionStrength * 0.5
-      factorY = 5
-    end
     Explosion(x, y, z, self.ExplosionStrength, self.ExplosionRange, self.ObjOwner.ClientID, AttackTypes.Rocket, self.Damage, factorY)
   end
   self.ExplosionFX(self._Entity, x, y, z, nx, ny, nz)

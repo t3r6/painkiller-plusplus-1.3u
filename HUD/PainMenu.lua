@@ -403,7 +403,7 @@ function PainMenu:ActivateScreen(screen)
     end
   elseif self.currScreen == CreateServerMenu then
     local item = self.currScreen.items.GeneralTab.items.GameMode
-    if item.values[item.currValue] == "Capture The Flag" then
+    if item.values[item.currValue] == "Capture The Flag" or item.values[item.currValue] == "ICTF" then
       PMENU.SetItemVisibility("CaptureLimit", true)
       PMENU.SetItemVisibility("LMSLives", false)
     elseif item.values[item.currValue] == "Last Man Standing" then
@@ -498,7 +498,7 @@ function PainMenu:ActivateScreenAlt(screen)
     end
   elseif self.currScreen == CreateServerMenu then
     local item = self.currScreen.items.GeneralTab.items.GameMode
-    if item.values[item.currValue] == "Capture The Flag" then
+    if item.values[item.currValue] == "Capture The Flag" or item.values[item.currValue] == "ICTF" then
       PMENU.SetItemVisibility("CaptureLimit", true)
       PMENU.SetItemVisibility("LMSLives", false)
     elseif item.values[item.currValue] == "Last Man Standing" then
@@ -1675,7 +1675,7 @@ function PainMenu:AfterControlChange(name)
   elseif self.currScreen == CreateServerMenu and name == "GameMode" then
     local item = self.currScreen.items.GeneralTab.items.GameMode
     PainMenu:UpdateMapTable("MapSelect", item.values[item.currValue])
-    if item.values[item.currValue] == "Capture The Flag" then
+    if item.values[item.currValue] == "Capture The Flag" or item.values[item.currValue] == "ICTF" then
       PMENU.SetItemVisibility("CaptureLimit", true)
       PMENU.SetItemVisibility("LMSLives", false)
     elseif item.values[item.currValue] == "Last Man Standing" then
@@ -2008,7 +2008,7 @@ function PainMenu:ShowTabGroup(group, name)
   end
   if self.currScreen == CreateServerMenu and name == "GeneralTab" then
     local item = self.currScreen.items.GeneralTab.items.GameMode
-    if item.values[item.currValue] == "Capture The Flag" then
+    if item.values[item.currValue] == "Capture The Flag" or item.values[item.currValue] == "ICTF" then
       PMENU.SetItemVisibility("CaptureLimit", true)
       PMENU.SetItemVisibility("LMSLives", false)
     elseif item.values[item.currValue] == "Last Man Standing" then
@@ -2538,6 +2538,9 @@ function PainMenu:UpdateMapTable(name, mode)
   elseif self.lastMPMode == "Capture The Flag" then
     self.mapsOnServerCTF = {}
     Cfg.ServerMapsCTF = {}
+  elseif self.lastMPMode == "ICTF" then
+    self.mapsOnServerCTF = {}
+    Cfg.ServerMapsCTF = {}
   elseif self.lastMPMode == "People Can Fly" then
     self.mapsOnServerPCF = {}
     Cfg.ServerMapsPCF = {}
@@ -2572,6 +2575,9 @@ function PainMenu:UpdateMapTable(name, mode)
     elseif self.lastMPMode == "Capture The Flag" then
       self.mapsOnServerCTF[i] = val
       Cfg.ServerMapsCTF[i] = val
+    elseif self.lastMPMode == "ICTF" then
+      self.mapsOnServerCTF[i] = val
+      Cfg.ServerMapsCTF[i] = val
     elseif self.lastMPMode == "Clan Arena" then
       self.mapsOnServerCLA[i] = val
       Cfg.ServerMapsCLA[i] = val
@@ -2586,7 +2592,11 @@ function PainMenu:UpdateMapTable(name, mode)
       Cfg.ServerMapsLMS[i] = val
     end
   end
-  PMENU.UpdateMapTable(name, mode)
+  if mode == "ICTF" then
+      PMENU.UpdateMapTable(name,"Capture The Flag")
+  else
+      PMENU.UpdateMapTable(name,mode)
+  end
   tmp_tab = {}
   if mode == "Free For All" then
     tmp_tab = self.mapsOnServerFFA
@@ -2608,6 +2618,8 @@ function PainMenu:UpdateMapTable(name, mode)
     tmp_tab = self.mapsOnServerCLA
   elseif mode == "Instagib" then
     tmp_tab = self.mapsOnServerFFA
+  elseif mode == "ICTF" then
+    tmp_tab = self.mapsOnServerCTF
   end
   self.mapsOnServer = {}
   Cfg.ServerMaps = {}

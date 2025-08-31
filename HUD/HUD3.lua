@@ -693,7 +693,7 @@ function Hud:CrosshairNames()
           end
         end
       end
-    elseif Game.PlayerStats[nameshow].Team ~= Player.Team or MPCfg.GameMode ~= "Team Deathmatch" and MPCfg.GameMode ~= "Capture The Flag" and MPCfg.GameMode ~= "Clan Arena" then
+    elseif Game.PlayerStats[nameshow].Team ~= Player.Team or (MPCfg.GameMode ~= "Team Deathmatch" and MPCfg.GameMode ~= "Capture The Flag" and MPCfg.GameMode ~= "ICTF" and MPCfg.GameMode ~= "Clan Arena") then
       if Cfg.CrosshairNamesE == "White" then
         colortxtcne = {
           255,
@@ -1100,7 +1100,7 @@ function Hud:DrawQuickOptionsMenu()
     local files = FS.FindFiles("../Data/Levels/*", 0, 1)
     local g = 1
     for f = 1, table.getn(files) do
-      if MPCfg.GameMode == "Capture The Flag" then
+      if MPCfg.GameMode == "Capture The Flag" or MPCfg.GameMode == "ICTF" then
         if string.find(string.lower(files[f]), "ctf_") then
           submenub[1][1] = "Reload Map"
           submenub[1][g + 1] = string.lower(files[f])

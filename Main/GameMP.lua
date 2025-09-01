@@ -1437,11 +1437,12 @@ function Game:CheckWarmUpStatus()
     
     -- BREAK WHEN PLAYING
     if Game:IsServer() then -- and Cfg.GameMode ~= "Clan Arena"
-        if MPCfg.GameState == GameStates.Playing and 
-           (pbreak >= n/2 or (MPGameRules[Cfg.GameMode].Teams and Cfg.StopMatchOnTeamQuit and (blues==0 or reds==0)))
+        if MPCfg.GameState == GameStates.Playing and Cfg.StopMatchOnTeamQuit and 
+           (pbreak >= n/2 or (MPGameRules[Cfg.GameMode].Teams --[[and Cfg.StopMatchOnTeamQuit--]] and (blues==0 or reds==0)))
         then            
             StringToDo = "Game.EndOfMatch()"
         end
+    -- TODO: This Clan Arena condition will never work. Consider changing it.
     elseif Game:IsServer() and Cfg.GameMode == "Clan Arena" and MPCfg.GameState == GameStates.Playing and (blues==0 or reds==0) then
     	if reds == 0 then Game._team1Score = Game._team1Score + 1 end
     	if blues == 0 then Game._team2Score = Game._team2Score + 1 end

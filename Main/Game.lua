@@ -834,7 +834,7 @@ function Game:LoadObjectsDirectory(path)
       if o and Game.GMode == GModes.DedicatedServer and fx then
         o = nil
       end
-      if o and Game.GMode == GModes.MultiplayerClient and o.BaseObj ~= "Teleport.CBox" and o._Class ~= "CArea" and not fx and not o.VisibleOnMPClient then
+      if o and Game.GMode == GModes.MultiplayerClient and o.BaseObj ~= "Teleport.CBox"  and o.BaseObj ~= "JumpPad.CItem" and o._Class ~= "CArea" and not fx and not o.VisibleOnMPClient then
         o._DeleteAfterCache = true
       end
       if o and Game:IsServer() then

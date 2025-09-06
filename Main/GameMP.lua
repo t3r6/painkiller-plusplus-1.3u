@@ -2126,12 +2126,10 @@ function Game:LoadNextMap()
 
 	Logfile:Close()
 		
-	if(Game:IsServer())then
-		if (Game._procStats)then
-			GObjects:ToKill(Game._procStats)
-			Game._procStats = nil
-		end
-	end
+  if IsDedicatedServer() and Game._procStats then
+      GObjects:ToKill(Game._procStats)
+      Game._procStats = nil
+  end
     
     Game.DuelQueueDone = nil
     

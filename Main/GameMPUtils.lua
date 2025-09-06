@@ -476,12 +476,10 @@ function Game:MapRestart()
     
     if Game:IsServer() then 
     
-    	if(Game:IsServer())then
-		if (Game._procStats)then
-			GObjects:ToKill(Game._procStats)
-			Game._procStats = nil
-		end
-	end
+      if IsDedicatedServer() and Game._procStats then
+          GObjects:ToKill(Game._procStats)
+          Game._procStats = nil
+      end
 	      
     	-- TESTED AND WORKING DO NOT CHANGE
 	Game:ResetGameState()

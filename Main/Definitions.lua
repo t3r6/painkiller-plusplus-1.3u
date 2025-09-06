@@ -1,4 +1,5 @@
 PK_VERSION = "1.64"
+PKPLUSPLUS_VERSION = "PK+++ Extra Plus"
 SCREEN_WIDTH, SCREEN_HEIGHT = 100, 100
 Keys = {
   MouseButtonLeft = 1,

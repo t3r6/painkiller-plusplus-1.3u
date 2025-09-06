@@ -1563,7 +1563,7 @@ function Console:Cmd_AUTOSCREENSHOT(enable)
 end
 
 function Console:Cmd_VERSION()
-  CONSOLE_AddMessage("PK++ 1.2.1.64")
+  CONSOLE_AddMessage(PKPLUSPLUS_VERSION)
 end
 
 function Console:Cmd_BLOWFISH()

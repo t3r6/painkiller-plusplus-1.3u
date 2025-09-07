@@ -1143,7 +1143,7 @@ function CPlayer:OnDamage(damage,killer,attack_type,x,y,z,nx,ny,nz)
         end
         return
     end  
-    if (not (not MPCfg.ProPlus and Cfg.FallingDamage) or MPCfg.GameMode == "Clan Arena" or MPCfg.GameMode == "Instagib" or MPCfg.GameMode == "ICTF") and MPCfg.GameState == GameStates.Playing and attack_type == AttackTypes.HitGround then return end  
+    if((not Cfg.FallingDamage) and MPCfg.GameState == GameStates.Playing and attack_type == AttackTypes.HitGround) then return end 
     if not Cfg.WarmupDamage and MPCfg.GameState ~= GameStates.Playing and attack_type ~= AttackTypes.ConsoleKill then return end
     -- if MPCfg.GameState == GameStates.WarmUp and MPCfg.GameMode == "Clan Arena" and attack_type ~= AttackTypes.ConsoleKill then return end
     if killer ~= nil and self.ClientID ~= killer.ClientID then

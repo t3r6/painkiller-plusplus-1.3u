@@ -462,7 +462,7 @@ function Game:GetNextWaypoint(botplayerid, currentwp)
   return nearestx, nearesty, nearestz, targetid, success
 end
 
-function Console:Cmd_KICKBOT()
+function Console:Cmd_REPLACEBOT()
   if Game.GMode == GModes.SingleGame then
     return
   end
@@ -484,6 +484,11 @@ function Console:Cmd_KICKBOT()
   end
 end
 
+function Console:Cmd_KICKBOT()
+  Console:Cmd_REPLACEBOT()
+  Cfg.BotMinPlayers = Cfg.BotMinPlayers - 1
+end
+
 function Console:Cmd_KICKALLBOTS()
   local botcount = 0
   for i, ps in Game.PlayerStats, nil do
@@ -494,6 +499,7 @@ function Console:Cmd_KICKALLBOTS()
   for i = 0, botcount + 1 do
     Console:Cmd_KICKBOT()
   end
+  Cfg.BotMinPlayers = 0
 end
 
 function Console:Cmd_BOTMINPLAYERS(number)
@@ -637,7 +643,7 @@ function Game:CheckBotCount()
       return
     end
     if maxplayers > Cfg.BotMinPlayers and (playercount > maxplayers - 1 or playercount > Cfg.BotMinPlayers) and 0 < botcount then
-      Console:Cmd_KICKBOT()
+      Console:Cmd_REPLACEBOT()
       return
     end
     if Cfg.BotMinPlayers == maxplayers and playercount < maxplayers - 1 and playercount < Cfg.BotMinPlayers then
@@ -645,7 +651,7 @@ function Game:CheckBotCount()
       return
     end
     if (Cfg.BotMinPlayers == maxplayers and playercount > maxplayers or playercount > Cfg.BotMinPlayers) and 0 < botcount then
-      Console:Cmd_KICKBOT()
+      Console:Cmd_REPLACEBOT()
       return
     end
     if Cfg.BotMinPlayers == maxplayers + 1 and playercount < maxplayers - 1 and playercount < Cfg.BotMinPlayers then
@@ -657,7 +663,7 @@ function Game:CheckBotCount()
       return
     end
     if Cfg.BotMinPlayers == maxplayers + 1 and playercount > maxplayers - 1 and 0 < speccount and 0 < botcount then
-      Console:Cmd_KICKBOT()
+      Console:Cmd_REPLACEBOT()
       return
     end
     if Cfg.BotMinPlayers > maxplayers + 1 and playercount < maxplayers and playercount < Cfg.BotMinPlayers then
@@ -665,7 +671,7 @@ function Game:CheckBotCount()
       return
     end
     if Cfg.BotMinPlayers > maxplayers + 1 and playercount > maxplayers and 0 < botcount then
-      Console:Cmd_KICKBOT()
+      Console:Cmd_REPLACEBOT()
       return
     end
   end

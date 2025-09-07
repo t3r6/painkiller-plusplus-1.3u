@@ -1690,7 +1690,7 @@ function PainMenu:AfterControlChange(name)
     if Game.GMode ~= GModes.SingleGame and not Game:IsServer() then
       PainMenu:ShowInfo(Languages.Texts[748], "PainMenu:ApplySettings(); PainMenu:ActivateScreen(PlayerOptions)", 26, "PredictionWarning", Languages.Texts[470])
     end
-  elseif self.currScreen == crosshairoptions and name == "showtimer" then
+  elseif self.currScreen == HUDConfig and name == "showtimer" then
     PainMenu:ApplySettings()
     if Game.LevelStarted == true then
       PMENU.SetItemVisibility("BackButton", false)

@@ -1506,39 +1506,39 @@ function Game:CheckVotingParams(cmd)
 		allowed = true
 	elseif cmd == "weaponrespawntime" and Cfg.UserWeaponRespawnTime then
 		allowed = true
-	elseif cmd == "startupweapon" and Cfg.StartupWeapon then
+	elseif cmd == "startupweapon" and Cfg.UserStartupWeapon then
 		allowed = true
-	elseif cmd == "proplus" then 
+	elseif cmd == "proplus" and Cfg.UserProPlus then
 		allowed = true
-	elseif cmd == "forcespec" then
+	elseif cmd == "forcespec" and Cfg.UserForceSpec then
 		allowed = true
-	elseif cmd == "allready" then
+	elseif cmd == "allready" and Cfg.UserAllready then
 		allowed = true
-	elseif cmd == "teamlock" then	
+	elseif cmd == "teamlock" and Cfg.UserTeamlock then
 		allowed = true
-	elseif cmd == "addbot" then
+	elseif cmd == "addbot" and Cfg.UserAddbot then
 		allowed = true
-	elseif cmd == "botminplayers" then
+	elseif cmd == "botminplayers" and Cfg.UserBotMinPlayers then
 		allowed = true
-  elseif cmd == "botattack" then
+	elseif cmd == "botattack" and Cfg.UserBotAttack then
 		allowed = true
-	elseif cmd == "botskill" then	
+	elseif cmd == "botskill" and Cfg.UserBotSkill then
 		allowed = true
-	elseif cmd == "kickbot" then
+	elseif cmd == "kickbot" and Cfg.UserKickBot then
 		allowed = true
-	elseif cmd == "kickallbots" then
+	elseif cmd == "kickallbots" and Cfg.UserKickAllBots then
 		allowed = true
-	elseif cmd == "referee" then
+	elseif cmd == "referee" and Cfg.UserReferee then
 		allowed = true
-	elseif cmd == "restartmap" then
+	elseif cmd == "restartmap" and Cfg.UserRestartMap then
 		allowed = true
-	elseif cmd == "saferespawn" then
+	elseif cmd == "saferespawn" and Cfg.UserSafeRespawn then
 		allowed = true
-	elseif cmd == "warmupdamage" then
+	elseif cmd == "warmupdamage" and Cfg.UserWarmupDamage then
 		allowed = true
-	elseif cmd == "fallingdamage" then
+	elseif cmd == "fallingdamage" and Cfg.UserFallingDamage then
 		allowed = true
-	elseif cmd == "rocketfix" then
+	elseif cmd == "rocketfix" and Cfg.UserRocketFix then
 		allowed = true
 	end
 	return allowed

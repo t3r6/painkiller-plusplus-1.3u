@@ -1211,9 +1211,13 @@ function Console:CheckVotingParams(cmd, params)
             return false
         end
         return true
+    elseif cmd == "teamlock" then
+        return true
     elseif cmd == "addbot" then
         return true
-    elseif cmd == "teamlock" then
+	elseif cmd == "botminplayers" then
+        return true
+    elseif cmd == "botattack" then
         return true
     elseif cmd == "kickbot" then
         return true

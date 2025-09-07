@@ -1514,15 +1514,19 @@ function Game:CheckVotingParams(cmd)
 		allowed = true
 	elseif cmd == "allready" then
 		allowed = true
-	elseif cmd == "botskill" then	
-		allowed = true
 	elseif cmd == "teamlock" then	
+		allowed = true
+	elseif cmd == "addbot" then
+		allowed = true
+	elseif cmd == "botminplayers" then
+		allowed = true
+  elseif cmd == "botattack" then
+		allowed = true
+	elseif cmd == "botskill" then	
 		allowed = true
 	elseif cmd == "kickbot" then
 		allowed = true
 	elseif cmd == "kickallbots" then
-		allowed = true
-	elseif cmd == "addbot" then
 		allowed = true
 	elseif cmd == "referee" then
 		allowed = true

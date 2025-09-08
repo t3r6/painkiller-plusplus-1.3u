@@ -1,8 +1,55 @@
+------------------------------------------------------------------------
+-- Joseph Weizenbaum's classic Eliza ported to SciTE
+-- Kein-Hong Man <khman@users.sf.net> 20050117
+-- This program is hereby placed into PUBLIC DOMAIN
+------------------------------------------------------------------------
+-- HOW TO USE
+--   This program is for recreational purposes only. :-)
+--   Create or load a file named "eliza" and type away...
+--   Eliza will not interfere with other open files.
+--   If you have existing event handlers, edit the handlers below...
+------------------------------------------------------------------------
+-- Original ELIZA paper:
+--   ELIZA--A Computer Program For the Study of Natural Language
+--   Communication Between Man and Machine,
+--   Joseph Weizenbaum, 1966, Communications of the ACM Volume 9,
+--   Number 1 (January 1966): 36-35.
+--   URL: http://i5.nyu.edu/~mm64/x52.9265/january1966.html
+------------------------------------------------------------------------
+-- A copy of the original BASIC source of this Lua version of ELIZA can
+-- be found at Josep Subirana's ELIZA download page.
+------------------------------------------------------------------------
+-- NOTES
+-- * Modifications made to fit the program into SciTE...
+-- * For historical accuracy, functionality is more-or-less identical,
+--   as is the use of an all upper-case alphabet for output.
+-- * There is really no point extending this program. Many other more
+--   advanced Eliza-type programs exist. Good candidates for porting are
+--   EMACS' doctor.el and Perl's Chatbot-Eliza. If I am really bored one
+--   of these days, maybe I'll do it...
+-- * One difference is keyword are matched by iterating through a hash
+--   array, so matching order will be different from initialization order.
+-- * In order to avoid keeping any internal state, this Eliza does not
+--   remember your name.
+-- * Input is now case-insensitive.
+-- * The original used backticks for apostrophes, this was fixed.
+-- * A couple of spelling mistakes in strings and comments fixed.
+------------------------------------------------------------------------
+
+--<snip>
+
+------------------------------------------------------------------------
+-- Eliza
+-- * Input is case insensitive. No punctuation except apostrophes,
+--   as in: don't you're i'm i've you've.
+------------------------------------------------------------------------
+
 function Eliza(text)
   local response = ""
-  
   local user = string.upper(text)
   local userOrig = user
+
+  -- randomly selected replies if no keywords
   local randReplies = {
     "EXPLAIN?",
     "ERM",
@@ -18,8 +65,10 @@ function Eliza(text)
     "HMMM",
     "BLAH",
     "WHATEVER",
-    "JUST PLAY?"
+    "JUST PLAY?",
   }
+
+  -- keywords, replies
   local replies = {
     [" HOW ARE YOU"] = "I AM FINE THANKS :)",
     [" READY"] = "I AM READY.. GOGOGO",
@@ -83,8 +132,10 @@ function Eliza(text)
     [" GL"] = "HF",
     [" HF"] = "GL",
     [" LAME"] = "HEH",
-    [" SUCK"] = "DONT WHINE"
+    [" SUCK"] = "DONT WHINE",
   }
+
+  -- conjugate
   local conjugate = {
     [" I "] = "YOU",
     [" ARE "] = "AM",
@@ -95,57 +146,58 @@ function Eliza(text)
     [" IM "] = "YOURE",
     [" ME "] = "YOU",
     [" AM I "] = "YOU ARE",
-    [" AM "] = "ARE"
+    [" AM "] = "ARE",
   }
+  	
   local responsearray = {}
   local responseindex = 0
   
+  -- random replies, no keyword
   local function replyRandomly()
     response = randReplies[math.random(table.getn(randReplies))]
   end
-  
+
+  -- find keyword, phrase
   local function processInput()
+
+  
     for keyword, reply in pairs(replies) do
       local d, e = string.find(user, keyword, 1, 1)
       if d then
-        response = response .. reply .. ""
-        if string.byte(string.sub(reply, -1)) < 65 then
-          response = response
-          return
+        -- process keywords
+        response = response..reply..""
+        if string.byte(string.sub(reply, -1)) < 65 then -- "A"
+          response = response;return
         end
         local h = string.len(user) - (d + string.len(keyword))
-        if 0 < h then
+        if h > 0 then
           user = string.sub(user, -h)
         end
         for cFrom, cTo in pairs(conjugate) do
           local f, g = string.find(user, cFrom, 1, 1)
           if f then
-            local j = string.sub(user, 1, f - 1) .. " " .. cTo
+            local j = string.sub(user, 1, f - 1).." "..cTo
             local z = string.len(user) - (f - 1) - string.len(cTo)
-            response = response .. j
-            if 2 < z then
+            response = response..j
+            if z > 2 then
               local l = string.sub(user, -(z - 2))
-              if not string.find(userOrig, l) then
-                return
-              end
+              if not string.find(userOrig, l) then return end
             end
-            if 2 < z then
-              response = response .. string.sub(user, -(z - 2))
-            end
-            if z < 2 then
-              response = response
-            end
+            if z > 2 then response = response..string.sub(user, -(z - 2)) end
+            if z < 2 then response = response  end
             return
-          end
-        end
-        response = response
+          end--if f
+        end--for
+        response = response 
         return
-      end
-    end
+      end--if d
+    end--for
     replyRandomly()
     return
   end
-  
+
+  -- main()
+  -- accept user input
   if string.sub(user, 1, 3) == "BYE" then
     response = "TTFN"
     return response
@@ -153,7 +205,11 @@ function Eliza(text)
   if string.sub(user, 1, 7) == "BECAUSE" then
     user = string.sub(user, 8)
   end
-  user = " " .. user .. " "
+  user = " "..user.." "
+  -- process input, print reply
   processInput()
+  response = response
   return response
 end
+
+-- end of script

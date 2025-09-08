@@ -649,7 +649,14 @@ function Console:Cmd_BOTLIMIT(number)
                 CONSOLE_AddMessage("Invalid input. Enter a non-negative number.")
                 return
             end
+
             value = math.floor(value)
+
+            if value > Cfg.MaxPlayers then
+                value = Cfg.MaxPlayers
+                CONSOLE_AddMessage("BotLimit cannot exceed MaxPlayers. Value set to " .. value .. ".")
+            end
+
             Cfg.BotLimit = value
             CONSOLE_AddMessage("Cfg.BotLimit is now " .. Cfg.BotLimit)
         end

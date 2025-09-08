@@ -610,6 +610,7 @@ Cfg =
 
   -- Bots
     BotMinPlayers = 2,
+    BotLimit = 16,
     BotAttack = true,
     BotFindItems = true,
     BotFakePing = true,

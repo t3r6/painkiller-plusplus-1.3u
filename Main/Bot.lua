@@ -502,20 +502,58 @@ function Console:Cmd_KICKALLBOTS()
   Cfg.BotMinPlayers = 0
 end
 
-function Console:Cmd_BOTMINPLAYERS(number)
-  if Game.GMode == GModes.SingleGame then
-    return
-  end
-  if Game:IsServer() then
-    if number == nil then
-      CONSOLE_AddMessage("Syntax: botminplayers <number>")
-      CONSOLE_AddMessage("Help: Sets the minimum number of players to appear on the server, before which bots are added. If set equal to Cfg.MaxPlayers, the bots will always leave one space for new players. If set greater than Cfg.MaxPlayers, bots will leave a space only if there are spectators present.")
-      CONSOLE_AddMessage("State: Cfg.BotMinPlayers is currently " .. tonumber(Cfg.BotMinPlayers))
-    else
-      Cfg.BotMinPlayers = tonumber(number)
-      CONSOLE_AddMessage("Cfg.BotMinPlayers is now " .. tonumber(number))
+function Console:Cmd_BOTLIMIT(number)
+    if Game.GMode == GModes.SingleGame then
+        return
     end
-  end
+    if Game:IsServer() then
+        if number == nil then
+            CONSOLE_AddMessage("Cfg.BotLimit is " .. Cfg.BotLimit)
+        else
+            local value = tonumber(number)
+            if value == nil or value < 0 then
+                CONSOLE_AddMessage("Invalid input. Enter a non-negative number.")
+                return
+            end
+            value = math.floor(value)
+            Cfg.BotLimit = value
+            CONSOLE_AddMessage("Cfg.BotLimit is now " .. Cfg.BotLimit)
+        end
+    end
+end
+
+function Console:Cmd_BOTMINPLAYERS(number)
+    if Game.GMode == GModes.SingleGame then
+        return
+    end
+    if Game:IsServer() then
+        if number == nil then
+            CONSOLE_AddMessage("Syntax: botminplayers <number>")
+            CONSOLE_AddMessage("Help: Sets the minimum number of players to appear on the server, before which bots are added. Maximum allowed: lesser of Cfg.MaxPlayers and Cfg.BotLimit.")
+            CONSOLE_AddMessage("State: Cfg.BotMinPlayers is currently " .. tonumber(Cfg.BotMinPlayers))
+        else
+            local value = tonumber(number)
+            if value == nil or value < 0 then
+                CONSOLE_AddMessage("Invalid input. Enter a non-negative number.")
+                return
+            end
+
+            value = math.floor(value)
+
+            local maxLimit = Cfg.MaxPlayers
+            if Cfg.BotLimit and Cfg.BotLimit < maxLimit then
+                maxLimit = Cfg.BotLimit
+            end
+
+            if value > maxLimit then
+                value = maxLimit
+                CONSOLE_AddMessage("BotMinPlayers cannot exceed " .. maxLimit .. ". Value set to " .. value .. ".")
+            end
+
+            Cfg.BotMinPlayers = value
+            CONSOLE_AddMessage("Cfg.BotMinPlayers is now " .. value)
+        end
+    end
 end
 
 function Console:Cmd_BOTSKILL(number)
@@ -635,6 +673,9 @@ function Game:CheckBotCount()
     end
     local playercount = bluecount + redcount + botspeccount
     local maxplayers = Cfg.MaxPlayers
+    if Cfg.BotLimit and Cfg.BotLimit < Cfg.MaxPlayers then
+      maxplayers = Cfg.BotLimit
+    end
     if Cfg.GameMode == "Duel" then
       maxplayers = 2
     end

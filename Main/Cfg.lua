@@ -639,6 +639,8 @@ Cfg =
     --DeadBodyFix = false,
     --FreezerFix = false,
 
+    TeleportConfirmation = true,
+
     RocketFix = true,
     RocketLogging = false,
     RocketsFromGun = true,

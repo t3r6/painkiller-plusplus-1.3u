@@ -193,7 +193,7 @@ function GetNetEvent(msg, clientID)
 	--CONSOLE_AddMessage(tostring(event[2]))
 	
 	-- IGNORE TELEPORT CONFIRMATION
-	if (tostring(event[2]) == "Teleport.MovePlayer") then  return end
+	if not Cfg.TeleportConfirmation and (tostring(event[2]) == "Teleport.MovePlayer") then  return end
 	
 	event[6](nil,unpack(args))
 	--    local a2 = INP.GetTimeFromTimerReset()

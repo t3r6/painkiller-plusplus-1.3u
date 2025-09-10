@@ -4,6 +4,7 @@ function Game:UpdateSpecs()
              
     	for i,o in Game.PlayerStats do
     		if(Game.PlayerStats[o.ClientID].Version) then --Game.PlayerStats[o.ClientID].Version~=nil and  and 
+	    		if(o.Spectator == 1)then
 				for id,ps in Game.PlayerStats do 
 					if(ps and ps.Player~=nil and ps.Spectator == 0) then
 						local ammo1 = 0
@@ -37,6 +38,7 @@ function Game:UpdateSpecs()
 						end
 					end
 				end
+	        	end
         	end
     	end
     end

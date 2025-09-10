@@ -30,6 +30,9 @@ function JumpPad:OnCreateEntity()
     ENTITY.SetPosition(self._Region,self.Pos.X,self.Pos.Y+0.8,self.Pos.Z)
     EntityToObject[self._Region] = self
     ENTITY.EnableNetworkSynchronization(self._Entity)
+    if Game.GMode == GModes.MultiplayerClient then
+        RawCallMethod(self.Show,self._Entity,false)
+    end
 end
 
 function JumpPad:OnEnter(entity)

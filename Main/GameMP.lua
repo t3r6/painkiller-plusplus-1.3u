@@ -1437,8 +1437,8 @@ function Game:CheckWarmUpStatus()
     
     -- BREAK WHEN PLAYING
     if Game:IsServer() then -- and Cfg.GameMode ~= "Clan Arena"
-        if MPCfg.GameState == GameStates.Playing and Cfg.StopMatchOnTeamQuit and 
-           (pbreak >= n/2 or (MPGameRules[Cfg.GameMode].Teams --[[and Cfg.StopMatchOnTeamQuit--]] and (blues==0 or reds==0)))
+        if MPCfg.GameState == GameStates.Playing and Cfg.StopMatchOnPlayersQuit and 
+           (pbreak >= n/2 or (MPGameRules[Cfg.GameMode].Teams and Cfg.StopMatchOnTeamQuit and (blues==0 or reds==0)))
         then            
             StringToDo = "Game.EndOfMatch()"
         end
@@ -1539,6 +1539,10 @@ function Game:CheckVotingParams(cmd)
 	elseif cmd == "fallingdamage" and Cfg.UserFallingDamage then
 		allowed = true
 	elseif cmd == "rocketfix" and Cfg.UserRocketFix then
+		allowed = true
+	elseif cmd == "stopmatchonplayersquit" and Cfg.UserStopMatchOnPlayersQuit then
+		allowed = true
+	elseif cmd == "stopmatchonteamquit" and Cfg.UserStopMatchOnTeamQuit then
 		allowed = true
 	end
 	return allowed

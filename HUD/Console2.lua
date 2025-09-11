@@ -3575,3 +3575,65 @@ function Console:Cmd_TELEPORTCONFIRMATION(enable)
     CONSOLE_AddMessage("State: Teleport Confirmation is currently disabled.")
   end
 end
+
+function Console:Cmd_STOPMATCHONPLAYERSQUIT(enable)
+  if enable == nil then
+    if Cfg.StopMatchOnPlayersQuit then
+      CONSOLE_AddMessage("Cfg.StopMatchOnPlayersQuit is 1 (enabled).")
+    else
+      CONSOLE_AddMessage("Cfg.StopMatchOnPlayersQuit is 0 (disabled).")
+    end
+    CONSOLE_AddMessage("StopMatchOnPlayersQuit Toggle. Stops match when all the players are left for non-team gamemodes. Required for the fallback to default maps.")
+    return
+  end
+
+  if enable ~= "1" and enable ~= "0" then
+    CONSOLE_AddMessage("Syntax: STOPMATCHONPLAYERSQUIT [1/0]")
+    return
+  end
+
+  if enable == "1" then
+    Cfg.StopMatchOnPlayersQuit = true
+    CONSOLE_AddMessage("StopMatchOnPlayersQuit is now enabled.")
+  elseif enable == "0" then
+    Cfg.StopMatchOnPlayersQuit = false
+    CONSOLE_AddMessage("StopMatchOnPlayersQuit is now disabled.")
+  end
+
+  if Cfg.StopMatchOnPlayersQuit then
+    CONSOLE_AddMessage("State: StopMatchOnPlayersQuit is currently enabled.")
+  else
+    CONSOLE_AddMessage("State: StopMatchOnPlayersQuit is currently disabled.")
+  end
+end
+
+function Console:Cmd_STOPMATCHONTEAMQUIT(enable)
+  if enable == nil then
+    if Cfg.StopMatchOnTeamQuit then
+      CONSOLE_AddMessage("Cfg.StopMatchOnTeamQuit is 1 (enabled).")
+    else
+      CONSOLE_AddMessage("Cfg.StopMatchOnTeamQuit is 0 (disabled).")
+    end
+    CONSOLE_AddMessage("StopMatchOnTeamQuit Toggle. Stops match when an entire team leaves for team gamemodes. Required for the fallback to default maps.")
+    return
+  end
+
+  if enable ~= "1" and enable ~= "0" then
+    CONSOLE_AddMessage("Syntax: STOPMATCHONTEAMQUIT [1/0]")
+    return
+  end
+
+  if enable == "1" then
+    Cfg.StopMatchOnTeamQuit = true
+    CONSOLE_AddMessage("StopMatchOnTeamQuit is now enabled.")
+  elseif enable == "0" then
+    Cfg.StopMatchOnTeamQuit = false
+    CONSOLE_AddMessage("StopMatchOnTeamQuit is now disabled.")
+  end
+
+  if Cfg.StopMatchOnTeamQuit then
+    CONSOLE_AddMessage("State: StopMatchOnTeamQuit is currently enabled.")
+  else
+    CONSOLE_AddMessage("State: StopMatchOnTeamQuit is currently disabled.")
+  end
+end

@@ -234,6 +234,9 @@ Cfg =
     UserFallingDamage = true,
     UserRocketFix = true,
 
+    UserStopMatchOnPlayersQuit = true,
+    UserStopMatchOnTeamQuit = true,
+
     ViewWeaponModel = true,
     WeaponBob = 0,
     WeaponNormalMap = true,
@@ -647,6 +650,8 @@ Cfg =
     --RocketExplosionStrength = 3150,
     --RocketFactor = 0.6,
     --RocketFactorOrder = 1,
+
+    StopMatchOnPlayersQuit = true, -- Similar to StopMatchOnTeamQuit for non-team modes. Required for changing to a default map when no players because Painkiller does not have map autodownload. Spectators are considered non-palyers too.
 
     WarmupDamage = true,
     WeaponPrediction = true,

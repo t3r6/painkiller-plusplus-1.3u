@@ -620,7 +620,9 @@ end
 
 function Console:Cmd_KICKBOT()
   Console:Cmd_REPLACEBOT()
-  Cfg.BotMinPlayers = Cfg.BotMinPlayers - 1
+	if Cfg.BotMinPlayers > 0 then
+		Cfg.BotMinPlayers = Cfg.BotMinPlayers - 1
+	end
 end
 --=======================================================================
 function Console:Cmd_KICKALLBOTS()

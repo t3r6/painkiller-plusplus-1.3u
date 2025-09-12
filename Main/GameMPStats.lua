@@ -28,6 +28,7 @@ function Game:UpdateSpecs()
 				        		ammo2 = tonumber(ps.Player.Ammo.MiniGun)
 				        	end
 				        	if(currentweaponindex==5) and ps.Player.Ammo.Electro~=nil and ps.Player.Ammo.Shurikens~=nil then
+								-- The ammo for ED was mistakingly inverted for the spectator and was fixed on the client side in Specmode.lua.
 				        		ammo1 = tonumber(ps.Player.Ammo.Electro)
 				        		ammo2 = tonumber(ps.Player.Ammo.Shurikens)
 				        	end
@@ -66,6 +67,7 @@ function Game:UpdateSpecs()
 				ammo2 = tonumber(ps.Player.Ammo.MiniGun)
 			end
 			if(currentweapon==5) and ps.Player.Ammo.Electro~=nil and ps.Player.Ammo.Shurikens~=nil then
+				-- The ammo for ED was mistakingly inverted for the spectator and was fixed on the client side in Specmode.lua.
 				ammo1 = tonumber(ps.Player.Ammo.Electro)
 				ammo2 = tonumber(ps.Player.Ammo.Shurikens)
 			end

@@ -702,6 +702,16 @@ function PSpectatorControler:SpectatorHUD()
 	        ammo1 = pd.Ammo1
 	        ammo2 = pd.Ammo2
 		currentweaponindex = pd.Weapon
+    -- A client fix for electrodriver ammo spec for compatibility because Shurikens/Electro ammo was mistakingly flipped on the server side in GameMPStats.lua.
+    -- start
+    if currentweaponindex == 5 then
+        ammo1 = pd.Ammo2
+        ammo2 = pd.Ammo1
+    else
+        ammo1 = pd.Ammo1
+        ammo2 = pd.Ammo2
+    end
+    --- end
 		armortype = pd.ArmorType
 		--MsgBox(pd.Weapon)
 	end

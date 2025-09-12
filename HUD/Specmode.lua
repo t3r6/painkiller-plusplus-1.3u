@@ -121,7 +121,7 @@ function PSpectatorControler:Init()
 	self._matAmmoCloseIcon = MATERIAL.Create("HUD/painkiller_close", TextureFlags.NoLOD + TextureFlags.NoMipMaps)
 	self._matInfinity = MATERIAL.Create("HUD/infinity", TextureFlags.NoLOD + TextureFlags.NoMipMaps)
 	self._matAmmoIconRFT = MATERIAL.Create("HUD/rifle", TextureFlags.NoLOD)
-	self._matAmmoElectroIcon = MATERIAL.Create("HUD/ikona_flamer", TextureFlags.NoLOD)
+	self._matAmmoFlamerIcon = MATERIAL.Create("HUD/ikona_flamer", TextureFlags.NoLOD)
 	self._matAmmoIconSG = MATERIAL.Create("HUD/shell", TextureFlags.NoLOD + TextureFlags.NoMipMaps)
 	self._matFreezerIcon = MATERIAL.Create("HUD/ikona_freezer", TextureFlags.NoLOD + TextureFlags.NoMipMaps)
         self._matMapViewBluePlayerIcon = MATERIAL.Create("Textures/team_blue.tga", TextureFlags.NoLOD + TextureFlags.NoMipMaps)
@@ -737,13 +737,15 @@ function PSpectatorControler:SpectatorHUD()
 	end
 
 	Hud:DrawDigitsText(Cfg.HUDSize*52*w/1024,((768+Cfg.HUDSize*16)-Cfg.HUDSize*sizey)*h/768,string.sub(string.format("%03d",he),-3),0.9 * Cfg.HUDSize,CPlayer.HealthWarning)
-	Hud:DrawDigitsText(Cfg.HUDSize*52*w/1024,((768+Cfg.HUDSize*50)-Cfg.HUDSize*sizey)*h/768,string.sub(string.format("%03d",armor),-3),0.9 * Cfg.HUDSize,nil)
+	Hud:DrawDigitsText(Cfg.HUDSize*52*w/1024,((768+Cfg.HUDSize*50)-Cfg.HUDSize*sizey)*h/768,string.sub(string.format("%03d",armor),-3),0.9 * Cfg.HUDSize,CPlayer.ArmorWarning)
   	Hud:DrawDigitsText((1024-118*Cfg.HUDSize)*w/1024,((768+Cfg.HUDSize*16)-Cfg.HUDSize*sizey)*h/768,string.sub(string.format("%03d",ammo1),-3),0.9 * Cfg.HUDSize,ammo1warning)
   	Hud:DrawDigitsText((1024-118*Cfg.HUDSize)*w/1024,((768+Cfg.HUDSize*50)-Cfg.HUDSize*sizey)*h/768,string.sub(string.format("%03d",ammo2),-3),0.9 * Cfg.HUDSize,ammo2warning)
 	
     if currentweaponindex == 1 then
 	Hud:Quad(self._matAmmoOpenIcon,(1024-62*Cfg.HUDSize)*w/1024,((768+Cfg.HUDSize*12)-Cfg.HUDSize*sizey)*h/768,Cfg.HUDSize,false)
 	Hud:Quad(self._matAmmoCloseIcon,(1024-62*Cfg.HUDSize)*w/1024,((768+Cfg.HUDSize*50)-Cfg.HUDSize*sizey)*h/768,Cfg.HUDSize,false)
+	-- Hud:Quad(self._matInfinity,(1024-118*Cfg.HUDSize)*w/1024,((768+Cfg.HUDSize*12)-Cfg.HUDSize*sizey)*h/768,Cfg.HUDSize,false)
+	-- Hud:Quad(self._matInfinity,(1024-118*Cfg.HUDSize)*w/1024,((768+Cfg.HUDSize*50)-Cfg.HUDSize*sizey)*h/768,Cfg.HUDSize,false)
     elseif  Currentweaponindex == 2 then
 	Hud:Quad(self._matAmmoIconSG,(1024-52*Cfg.HUDSize)*w/1024,((768+Cfg.HUDSize*11)-Cfg.HUDSize*sizey)*h/768,Cfg.HUDSize,false)
 	Hud:Quad(self._matFreezerIcon,(1024-55*Cfg.HUDSize)*w/1024,((768+Cfg.HUDSize*46)-Cfg.HUDSize*sizey)*h/768,Cfg.HUDSize,false)
@@ -758,7 +760,7 @@ function PSpectatorControler:SpectatorHUD()
 	Hud:Quad(self._matAmmoElectroIcon,(1024-52*Cfg.HUDSize)*w/1024,((768+Cfg.HUDSize*42)-Cfg.HUDSize*sizey)*h/768,Cfg.HUDSize,false)
     elseif  currentweaponindex == 6 then
 	Hud:Quad(self._matAmmoIconRFT,(1024-56*Cfg.HUDSize)*w/1024,((768+Cfg.HUDSize*12)-Cfg.HUDSize*sizey)*h/768,Cfg.HUDSize,false)
-	Hud:Quad(self._matAmmoElectroIcon,(1024-52*Cfg.HUDSize)*w/1024,((768+Cfg.HUDSize*47)-Cfg.HUDSize*sizey)*h/768,Cfg.HUDSize,false)
+	Hud:Quad(self._matAmmoFlamerIcon,(1024-52*Cfg.HUDSize)*w/1024,((768+Cfg.HUDSize*47)-Cfg.HUDSize*sizey)*h/768,Cfg.HUDSize,false)
     elseif  currentweaponindex == 7 then
 	Hud:Quad(self._matAmmoIcon1,(1024-52*Cfg.HUDSize)*w/1024,((768+Cfg.HUDSize*11)-Cfg.HUDSize*sizey)*h/768,Cfg.HUDSize,false)
 	Hud:Quad(self._matAmmoIcon2,(1024-52*Cfg.HUDSize)*w/1024,((768+Cfg.HUDSize*49)-Cfg.HUDSize*sizey)*h/768,Cfg.HUDSize,false)

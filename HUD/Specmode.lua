@@ -618,21 +618,21 @@ function PSpectatorControler:ProHud(he, ar, am1, am2, cwi, art)
   }
   local cupriammolistnumwar = {
     0,
-    CPlayer.s_SubClass.AmmoWarning[Shotgun],
-    CPlayer.s_SubClass.AmmoWarning[Stakes],
-    CPlayer.s_SubClass.AmmoWarning[Grenades],
-    CPlayer.s_SubClass.AmmoWarning[Shurikens],
-    CPlayer.s_SubClass.AmmoWarning[Rifle],
-    CPlayer.s_SubClass.AmmoWarning[Bolt]
+    CPlayer.s_SubClass.AmmoWarning["Shotgun"],
+    CPlayer.s_SubClass.AmmoWarning["Stakes"],
+    CPlayer.s_SubClass.AmmoWarning["Grenades"],
+    CPlayer.s_SubClass.AmmoWarning["Shurikens"],
+    CPlayer.s_SubClass.AmmoWarning["Rifle"],
+    CPlayer.s_SubClass.AmmoWarning["Bolt"]
   }
   local cualtammolistnumwar = {
     0,
-    CPlayer.s_SubClass.AmmoWarning[IceBullets],
-    CPlayer.s_SubClass.AmmoWarning[Grenades],
-    CPlayer.s_SubClass.AmmoWarning[MiniGun],
-    CPlayer.s_SubClass.AmmoWarning[Electro],
-    CPlayer.s_SubClass.AmmoWarning[FlameThrower],
-    CPlayer.s_SubClass.AmmoWarning[HeaterBomb]
+    CPlayer.s_SubClass.AmmoWarning["IceBullets"],
+    CPlayer.s_SubClass.AmmoWarning["Grenades"],
+    CPlayer.s_SubClass.AmmoWarning["MiniGun"],
+    CPlayer.s_SubClass.AmmoWarning["Electro"],
+    CPlayer.s_SubClass.AmmoWarning["FlameThrower"],
+    CPlayer.s_SubClass.AmmoWarning["HeaterBomb"]
   }
   local cunumcharact = { "%03d", "%03d", "%04d", "%03d", "%04d", "%04d", "%04d" }
   local color = { {204, 102, 0}, {153, 153, 153}, {255, 204, 0} }
@@ -722,28 +722,28 @@ function PSpectatorControler:SpectatorHUD()
 		self:ProHud(he, armor, ammo1, ammo2, currentweaponindex, armortype)
 	else
 	if(currentweaponindex==2)then
-		ammo1warning = CPlayer.s_SubClass.AmmoWarning[Shotgun]
-		ammo2warning = CPlayer.s_SubClass.AmmoWarning[IceBullets]
+		ammo1warning = CPlayer.s_SubClass.AmmoWarning["Shotgun"]
+		ammo2warning = CPlayer.s_SubClass.AmmoWarning["IceBullets"]
 	end
 	if(currentweaponindex==3)then
-		ammo1warning = CPlayer.s_SubClass.AmmoWarning[Stakes]
-		ammo2warning = CPlayer.s_SubClass.AmmoWarning[Grenades]
+		ammo1warning = CPlayer.s_SubClass.AmmoWarning["Stakes"]
+		ammo2warning = CPlayer.s_SubClass.AmmoWarning["Grenades"]
 	end
 	if(currentweaponindex==4)then
-		ammo1warning = CPlayer.s_SubClass.AmmoWarning[Shotgun]
-		ammo2warning = CPlayer.s_SubClass.AmmoWarning[MiniGun]
+		ammo1warning = CPlayer.s_SubClass.AmmoWarning["Shotgun"]
+		ammo2warning = CPlayer.s_SubClass.AmmoWarning["MiniGun"]
 	end
 	if(currentweaponindex==5)then
-		ammo1warning = CPlayer.s_SubClass.AmmoWarning[Shurikens]
-		ammo2warning = CPlayer.s_SubClass.AmmoWarning[Electro]
+		ammo1warning = CPlayer.s_SubClass.AmmoWarning["Shurikens"]
+		ammo2warning = CPlayer.s_SubClass.AmmoWarning["Electro"]
 	end
 	if(currentweaponindex==6)then
-		ammo1warning = CPlayer.s_SubClass.AmmoWarning[Rifle]
-		ammo2warning = nil
+		ammo1warning = CPlayer.s_SubClass.AmmoWarning["Rifle"]
+		ammo2warning = CPlayer.s_SubClass.AmmoWarning["FlameThrower"]
 	end
 	if(currentweaponindex==7)then
-		ammo1warning = CPlayer.s_SubClass.AmmoWarning[Bolt]
-		ammo2warning = CPlayer.s_SubClass.AmmoWarning[HeaterBomb]
+		ammo1warning = CPlayer.s_SubClass.AmmoWarning["Bolt"]
+		ammo2warning = CPlayer.s_SubClass.AmmoWarning["HeaterBomb"]
 	end
 
 	Hud:DrawDigitsText(Cfg.HUDSize*52*w/1024,((768+Cfg.HUDSize*16)-Cfg.HUDSize*sizey)*h/768,string.sub(string.format("%03d",he),-3),0.9 * Cfg.HUDSize,CPlayer.HealthWarning)

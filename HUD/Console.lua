@@ -734,132 +734,8 @@ function Console:Cmd_GAMEMODE(mode)
 	if Game.GMode == GModes.SingleGame then return end
 	if not Game:IsServer() then return end
 
-    if IsMPDemo() then
-        CONSOLE_AddMessage("Command 'gamemode' not available in demo version")
-        return
-    end
-    local toPCF = false
-    local fromPCF = false
-    if Cfg.GameMode == "People Can Fly" then
-        fromPCF = true
-    elseif mode == "pcf" then
-        toPCF = true
-    end
-    local newMap, mapsTable
-    if mode == "ffa" then
-        if Cfg.GameMode == "Free For All" then
-            return
-        end
-        Cfg.GameMode = "Free For All"
-        newMap = "DM_Sacred"
-        mapsTable = Cfg.ServerMapsFFA
-    elseif mode == "tdm" then
-        if Cfg.GameMode == "Team Deathmatch" then
-            return
-        end
-        Cfg.GameMode = "Team Deathmatch"
-        newMap = "DM_Mine"
-        mapsTable = Cfg.ServerMapsTDM
-    elseif mode == "voosh" then
-        if Cfg.GameMode == "Voosh" then
-            return
-        end
-        Cfg.GameMode = "Voosh"
-        newMap = "DM_Cursed"
-        mapsTable = Cfg.ServerMapsVSH
-    elseif mode == "tlb" then
-        if Cfg.GameMode == "The Light Bearer" then
-            return
-        end
-        Cfg.GameMode = "The Light Bearer"
-        newMap = "DM_Sacred"
-        mapsTable = Cfg.ServerMapsTLB
-    elseif mode == "ctf" then
-        if Cfg.GameMode == "Capture The Flag" then
-            return
-        end
-        Cfg.GameMode = "Capture The Flag"
-        newMap = "CTF_Forbidden"
-        mapsTable = Cfg.ServerMapsCTF
-    elseif mode == "pcf" then
-        if Cfg.GameMode == "People Can Fly" then
-            return
-        end
-        Cfg.GameMode = "People Can Fly"
-        newMap = "DMPCF_Tower"
-        mapsTable = Cfg.ServerMapsPCF
-    elseif mode == "duel" then
-        if Cfg.GameMode == "Duel" then
-            return
-        end
-        Cfg.GameMode = "Duel"
-        newMap = "DM_Sacred"
-        mapsTable = Cfg.ServerMapsDUE
-    elseif mode == "ca" then
-        if Cfg.GameMode == "Clan Arena" then
-            return
-        end
-        Cfg.GameMode = "Clan Arena"
-        newMap = "DM_Sacred"
-        mapsTable = Cfg.ServerMapsCLA
-    elseif mode == "ig" then
-        if Cfg.GameMode == "Instagib" then
-            return
-        end
-        Cfg.GameMode = "Instagib"
-        newMap = "DM_Unseen"
-        mapsTable = Cfg.ServerMapsFFA
-    elseif mode == "ictf" then
-        if Cfg.GameMode == "ICTF" then
-            return
-        end
-        Cfg.GameMode = "ICTF"
-        newMap = "CTF_Forbidden"
-        mapsTable = Cfg.ServerMapsCTF
-    elseif mode == "lms" then
-        if Cfg.GameMode == "Last Man Standing" then
-            return
-        end
-        Cfg.GameMode = "Last Man Standing"
-        newMap = "DM_Factory"
-        mapsTable = Cfg.ServerMapsLMS
-    else
-        CONSOLE_AddMessage("Available modes: ffa, tdm, voosh, tlb, pcf, ctf, duel, lms, ig, ictf, ca (wip)")
-        return
-    end
-    Cfg.ServerMaps = {}
-    PainMenu.mapsOnServer = {}
-    if mapsTable[1] then
-        newMap = mapsTable[1]
-        for i = 1, table.getn(mapsTable) do
-            Cfg.ServerMaps[i] = mapsTable[i]
-            PainMenu.mapsOnServer[i] = mapsTable[i]
-        end
-    else
-        Cfg.ServerMaps[1] = newMap
-        PainMenu.mapsOnServer[1] = newMap
-    end
-    Game.SetConfiguration(
-        Cfg.AllowBrightskins,
-        Cfg.GameMode,
-        Cfg.FragLimit,
-        Cfg.CaptureLimit,
-        Cfg.LMSLives,
-        Cfg.TeamDamage,
-        Cfg.ClientConsoleLockdown
-    )
-    Console:Cmd_MAP(newMap)
-end
---=======================================================================
-function Console:Cmd_MODE(mode)
-    if Game.GMode == GModes.SingleGame then
-        return
-    end
-    if not Game:IsServer() then
-        return
-    end
 	if IsMPDemo() then
-		CONSOLE_AddMessage( "Command 'mode' not available in demo version" )
+		CONSOLE_AddMessage( "Command 'gamemode' not available in demo version" )
 		return
 	end
 
@@ -934,7 +810,7 @@ function Console:Cmd_MODE(mode)
 		newMap = "DM_Factory"
 		mapsTable = Cfg.ServerMapsLMS
 	else
-		CONSOLE_AddMessage("Available modes: ffa, tdm, voosh, tlb, pcf, ctf, duel, lms, ig, ictf, ca (wip)")
+		CONSOLE_AddMessage("Available modes: ffa, tdm, voosh, tlb, pcf, ctf, duel, lms, ig, ictf, ca")
 		return
 	end
 	Cfg.ServerMaps = {}
@@ -955,6 +831,9 @@ function Console:Cmd_MODE(mode)
 
 	Console:Cmd_MAP(newMap)
 end
+--=======================================================================
+-- \gamemode and \mode are the same commands
+Console.Cmd_MODE = Console.Cmd_GAMEMODE
 --=======================================================================
 function Console:CheckVotingParams(cmd,params)
 	if cmd == "map" then
@@ -1104,37 +983,8 @@ function Console:Cmd_CALLVOTE(params)
 	end
 end
 --=======================================================================
-function Console:Cmd_CV(params)
-    if Game.GMode == GModes.SingleGame then
-        return
-    end
-    if NET.IsSpectator(NET.GetClientID()) then
-        return
-    end
-    if not params or params == "" then
-        return
-    end
-    local i = string.find(params, " ", 1, true)
-    i = i or string.len(params) + 1
-    local cmd = string.sub(params, 1, i - 1)
-    params = Trim(string.sub(params, i))
-    if not Console["Cmd_" .. string.upper(cmd)] then
-        CONSOLE_AddMessage("Unknown command: " .. cmd)
-        return
-    end
-    if not self:CheckVotingParams(cmd, params) then
-        return
-    end
-    local numPlayers = 0
-    for i, o in Game.PlayerStats, nil do
-        numPlayers = numPlayers + 1
-    end
-    if Game._voteCmd == "" then
-        Game.StartVotingRequest(NET.GetClientID(), cmd, params)
-    else
-        CONSOLE_AddMessage("Please wait till current voting is over")
-    end
-end
+-- \callvote and cv are the same commands
+Console.Cmd_CV = Console.Cmd_CALLVOTE
 --=======================================================================
 function Console:Cmd_VOTE(yesno)
 	if Game.GMode == GModes.SingleGame then return end
